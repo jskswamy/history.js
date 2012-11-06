@@ -1050,21 +1050,7 @@
 		 * @return {string}
 		 */
 		History.unescapeString = function(str){
-			// Prepare
-			var result = str,
-				tmp;
-
-			// Unescape hash
-			while ( true ) {
-				tmp = window.decodeURI(result);
-				if ( tmp === result ) {
-					break;
-				}
-				result = tmp;
-			}
-
-			// Return result
-			return result;
+			return window.decodeURI(str);
 		};
 
 		/**
@@ -1171,7 +1157,7 @@
 			var result = History.normalizeHash(hash);
 
 			// Escape hash
-			result = window.encodeURI(result);
+			result = window.encodeURI(History.unescapeString(result));
 
 			// IE6 Escape Bug
 			if ( !History.bugs.hashEscape ) {
